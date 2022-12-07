@@ -49,7 +49,7 @@ form {
 
   button[type="submit"],
   input[type="submit"] {
-    background: #ec5990;
+    background: #333;
     color: white;
     text-transform: uppercase;
     border: none;
