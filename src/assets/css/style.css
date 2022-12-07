@@ -1,0 +1,12 @@
+.bar {
+    color: white !important;
+  }
+.formInput{
+  margin:50px ;
+  display: flex;
+  justify-content: space-between;
+  max-width: 500px;
+}
+.Polaris-Connected{
+  margin: 5px;
+}

@@ -7,10 +7,10 @@ import {
   Switch,
   useLocation,
 } from "react-router-dom";
-import Subcription from "../../components/Customs/Subcription";
 import dashboardRoutes from "../../routes/DashboardRoute";
 import ChooseDashboard from "../../components/Customs/ChooseDashboard/ChooseDashboard";
 import Revenue from "../../components/Customs/Revenue/Revenue";
+import Subcription from "../../components/Customs/Subcription/Subcription";
 const Dashboard = () => {
   const location = useLocation();
   const mainPanel = React.useRef(null);
