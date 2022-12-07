@@ -9,7 +9,6 @@ import { AppProvider } from "@shopify/polaris";
 import useLink from "./hooks/useLink";
 
 import "@shopify/polaris/styles.css";
-import "./assets/scss/main.scss";
 import "./assets/css/style.css";
 ReactDOM.render(
   <AppProvider linkComponent={useLink}>
