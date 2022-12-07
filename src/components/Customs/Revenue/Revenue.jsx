@@ -12,7 +12,7 @@ import {
 import dataBarChart from "../../../data/dataBarChart";
 const Revenue = () => {
   return (
-    <div>
+    <div className="contentDashboard">
       <h1>Doanh thu từng tháng</h1>
       <div>
         <BarChart width={800} height={450} data={dataBarChart}>

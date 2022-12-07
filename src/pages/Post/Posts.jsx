@@ -1,31 +1,29 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { Page, Card } from "@shopify/polaris";
 import { Link } from "react-router-dom";
-import { Space, Table, Button, Modal, Popover } from "antd";
+import { Table, Button, Input, Popover } from "antd";
 import axios from "axios";
 const Posts = () => {
   const [getData, setGetData] = useState("");
+  const [searchByTitle, setSearchByTitle] = useState("");
   async function getDataFake() {
-    const { data } = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
-    );
-    setGetData(data);
+    if (searchByTitle === "") {
+      const { data } = await axios.get(
+        ` https://jsonplaceholder.typicode.com/posts`
+      );
+      setGetData(data);
+    } else if (searchByTitle !== "") {
+      const { data } = await axios.get(
+        ` https://jsonplaceholder.typicode.com/posts?title=${searchByTitle}`
+      );
+      setGetData(data);
+    }
   }
+
   useEffect(() => {
-    getDataFake();
-  }, []);
-  console.log(getData);
+    getDataFake(searchByTitle);
+  }, [searchByTitle]);
   const data = [];
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
   const columns = [
     {
       title: "ID",
@@ -74,6 +72,13 @@ const Posts = () => {
 
   return (
     <>
+      <div className="filterTitle">
+        <h3>Search</h3>{" "}
+        <Input
+          placeholder="Search by title"
+          onChange={(e) => setSearchByTitle(e.target.value)}
+        />
+      </div>
       <div>
         <Table columns={columns} dataSource={data} />
       </div>

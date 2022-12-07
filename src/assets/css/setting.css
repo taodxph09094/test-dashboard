@@ -12,7 +12,6 @@ form {
   }
 
   .form {
-    /* background: #0e101c; */
     max-width: 400px;
     margin: 0 auto;
   }
@@ -92,7 +91,6 @@ form {
   button[type="button"] {
     display: block;
     appearance: none;
-    /* background: #333; */
     color: white;
     border: none;
     text-transform: uppercase;
@@ -129,8 +127,7 @@ form {
 	outline: none;
 	border: none;
     width: 100px;
-    height: 35px;
-    /* background-color:#f9004d; */
+    height: 40px;
 
 	color: #fff;
 	top: 1px;

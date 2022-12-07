@@ -1,7 +1,7 @@
 const dashboardRoutes = [
   {
     path: "/subcription",
-    name: "Dashboard",
+    name: "Subcription",
     layout: "/dashboard",
   },
   {

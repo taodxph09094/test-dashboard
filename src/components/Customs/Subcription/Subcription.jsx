@@ -13,7 +13,7 @@ import {
 import dataLineChart from "../../../data/dataLineChart";
 const Subcription = () => {
   return (
-    <div>
+    <div className="contentDashboard">
       <h1>Line Chart</h1>
       <div className="App">
         <LineChart

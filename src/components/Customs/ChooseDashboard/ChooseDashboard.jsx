@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, ButtonGroup } from "@shopify/polaris";
+import { Button as ButtonAnt, Space, Radio } from "antd";
 import { Link, NavLink, useLocation } from "react-router-dom";
 const ChooseDashboard = ({ routes }) => {
   const location = useLocation();
@@ -11,24 +12,15 @@ const ChooseDashboard = ({ routes }) => {
       {routes.map((prop, key) => {
         if (!prop.redirect)
           return (
-            <ButtonGroup
-              className={
-                prop.upgrade
-                  ? "active active-pro"
-                  : activeRoute(prop.layout + prop.path)
-              }
-              key={key}
-            >
+            <Radio.Group key={key} defaultValue="a" size="large">
               <Link
                 to={prop.layout + prop.path}
                 className="nav-link"
                 activeClassName="active"
               >
-                <Button>
-                  <p>{prop.name}</p>
-                </Button>
+                <Radio.Button value="a">{prop.name}</Radio.Button>
               </Link>
-            </ButtonGroup>
+            </Radio.Group>
           );
         return null;
       })}

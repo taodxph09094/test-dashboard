@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "../../assets/css/setting.css";
 import DatePicker from "react-datepicker";
@@ -10,58 +10,52 @@ const Settings = () => {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
   const [color, setColor] = useState("#E00202");
-  const [onPressCheck, setOnPressCheck] = useState(false);
-
+  const [title, setTitle] = useState("");
+  const [email, setEmail] = useState("");
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    // alert(JSON.stringify(data));
-    if (startDate != null && color != "") {
-      console.log(
-        JSON.stringify(data) +
-          " Từ ngày: " +
-          moment(startDate).format("DD-MM-YYYY") +
-          " đến: " +
-          moment(endDate).format("DD-MM-YYYY")
-      );
-    } else {
-      console.log();
-    }
+  const onPressSubmit = () => {
+    console.log(
+      "title: " +
+        title +
+        ", " +
+        "email: " +
+        email +
+        ", " +
+        " Từ ngày: " +
+        moment(startDate).format("DD-MM-YYYY") +
+        " đến: " +
+        moment(endDate).format("DD-MM-YYYY") +
+        ", " +
+        "color: " +
+        color
+    );
   };
-  console.log(onPressCheck);
   const [openPickColor, setOpenPickColor] = useState(false);
   const handleShow = () => {
     setOpenPickColor(!openPickColor);
   };
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onPressSubmit)}>
         <label>Title</label>
         <input
-          {...register("title", {
-            required: true,
-            minLength: 3,
-          })}
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
         />
-        {console.log(errors?.title?.type)}
-        {errors?.title?.type === "required" && <p>Không được để trống</p>}
-        {errors?.title?.type === "minLength" && (
-          <p>Tiêu đề tối thiểu 3 ký tự</p>
-        )}
+        {title === "" && <p>Không được để trống</p>}
         <label>Email</label>
         <input
-          {...register("email", {
-            required: true,
-            pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-          })}
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
-
-        {errors?.email?.type === "required" && <p>Không được để trống</p>}
-        {errors?.email?.type === "pattern" && <p>Định dạng email không đúng</p>}
+        {email === "" && <p>Không được để trống</p>}
+        <label>Active date</label>
         <DatePicker
           selectsRange={true}
           startDate={startDate}
@@ -72,7 +66,13 @@ const Settings = () => {
           isClearable={true}
         />
 
-        {onPressCheck && <p>Không được để trống</p>}
+        {startDate === null ? (
+          <p>Không được để trống</p>
+        ) : (
+          endDate === null && <p>Chưa chọn ngày kết thúc</p>
+        )}
+
+        <label>Background Color</label>
         <div className="pickColor">
           <input
             type="text"
@@ -86,14 +86,14 @@ const Settings = () => {
           ></div>
         </div>
         {color === "" && <p>Không được để trống</p>}
-        {/* {errors?.colorPick?.type === "required" && <p>Không được để trống</p>} */}
+
         {openPickColor && (
           <ColorPicker
             color={color}
             onChange={(color) => setColor(color.hex)}
           />
         )}
-        {startDate == null && color === "" ? (
+        {startDate == null && color === "" && title === "" && email === "" ? (
           <div></div>
         ) : (
           <input type="submit" value="Save" />
